@@ -34,7 +34,7 @@ entity market_data_top is
         clk             : in std_logic;
         rst             : in std_logic;
         
-        in_valid        : in std_logic;    --why does the top module need inputs aside from clk and rst?
+        in_valid        : in std_logic;    
         in_data         : in std_logic_vector( 7 downto 0);
         
         buy_threshold   : in std_logic_vector ( 15 downto 0);
@@ -47,7 +47,7 @@ entity market_data_top is
         ask_price      : out std_logic_vector(15 downto 0);
         
         action_valid   : out std_logic;
-        signal_action  : out std_logic_vector(1 downto 0) --Why do we have signal engine outputs?
+        signal_action  : out std_logic_vector(1 downto 0) 
 
     );
 end market_data_top;
@@ -56,11 +56,11 @@ architecture Behavioral of market_data_top is
     signal parser_instrument    : std_logic_vector (7 downto 0);
     signal parser_bid_price     : std_logic_vector (15 downto 0);
     signal parser_ask_price     : std_logic_vector (15 downto 0);
-    signal parser_out_valid     : std_logic; --what is the actual point of all the valid signals?
+    signal parser_out_valid     : std_logic; 
     
 begin
 
-    u_parser : entity work.market_packet_parser --what are we actualy doing here?
+    u_parser : entity work.market_packet_parser 
         port map(
             clk         => clk,
             rst         => rst,
@@ -68,7 +68,7 @@ begin
             in_valid    => in_valid,
             in_data     => in_data,
             
-            out_valid   => parser_out_valid, -- What does => actually mean and why is it in this direction
+            out_valid   => parser_out_valid, 
             instrument  => parser_instrument,
             bid_price   => parser_bid_price,
             ask_price   => parser_ask_price
@@ -90,7 +90,7 @@ begin
         );
         
         
---What in the helly is this last bit? storing data from the signals?        
+
 parsed_valid    <= parser_out_valid;
 instrument      <= parser_instrument;
 bid_price       <= parser_bid_price;
